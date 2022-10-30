@@ -27,9 +27,9 @@
 - hosts: all
   become: true
   roles:
-#    - elasticstack
-#    - nagios
-#    - grafana
-#    - prometheus
-#    - influxdb
+    - elasticstack
+    - nagios
+    - grafana
+    - prometheus
+    - influxdb
     - lampstack
