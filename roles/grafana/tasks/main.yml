@@ -1,0 +1,34 @@
+- name: Install Grafana Package in (Ubuntu)
+  shell: wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add - | sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
+  when: ansible_distribution == "Ubuntu"
+
+- name: read the Grafana Package (Ubuntu)
+  apt:
+    upgrade: dist
+    update_cache: yes
+  changed_when: false
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Grafana in (Ubuntu)
+  apt:
+    name: grafana
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Downlod package Grafana in (CentOS)
+  get_url:
+    url: https://dl.grafana.com/enterprise/release/grafana-enterprise-9.2.2-1.x86_64.rpm
+    dest: /tmp/grafana-enterprise-9.2.2-1.x86_64.rpm
+  when: ansible_distribution == "CentOS"
+
+- name: Install Grafana in (CentOS)
+  yum:
+    name: /tmp/grafana-enterprise-9.2.2-1.x86_64.rpm
+    state: present
+  when: ansible_distribution == "CentOS"
+
+- name: Start Grafana Package
+  service:
+    name: grafana-server
+    state: restarted
+

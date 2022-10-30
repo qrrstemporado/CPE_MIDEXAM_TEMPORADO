@@ -1,5 +1,7 @@
 [elasticstack]
 192.168.56.109
+
+[elasticstackCent]
 192.168.56.105
 
 [nagios]
